@@ -29,6 +29,9 @@ import SimplerOtpVerfication from '../App/Components/SimplerOtpVerfication';
 import Logout from '../App/Screens/MenuScreens/Logout';
 import RadioLive from '../App/Screens/MenuScreens/RadioLive';
 import SellAlbum from '../App/Screens/Engineer/SellAlbum';
+import Payment from '../App/Screens/Engineer/Payment';
+import PurchasedAlbum from '../App/Screens/Engineer/PurchasedAlbum';
+import Download from '../App/Screens/Engineer/Download';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
@@ -37,7 +40,8 @@ const TabsNavigation = () => {
   return (
     <Tab.Navigator tabBar={props => <TabBar {...props} />}>
       <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
-      <Tab.Screen name="AlbumCatlog" component={AlbumCatlog} options={{ headerShown: false }} />
+      <Tab.Screen name="RadioLive" component={RadioLive} options={{ headerShown: false }}/>
+
     </Tab.Navigator>
   );
 }
@@ -46,7 +50,7 @@ const DrawerHandle = () => {
     <Drawer.Navigator initialRouteName="Tabs" drawerPosition="left" drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Play/History" component={History} options={{ headerShown: false }} />
       <Drawer.Screen name="Schedule" component={Schedule} options={{ headerShown: false }} />
-      <Drawer.Screen name="Gospel" component={Gospel} options={{ headerShown: false }} />
+      <Drawer.Screen name="Gospel Websites" component={Gospel} options={{ headerShown: false }} />
       <Drawer.Screen name="GuestBook" component={GuestBook} options={{ headerShown: false }} />
       <Drawer.Screen name="Contact" component={Contact} options={{ headerShown: false }} />
       <Drawer.Screen name="About" component={About} options={{ headerShown: false }} />
@@ -71,8 +75,14 @@ function Route() {
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
         <Stack.Screen name="SimplerOtpVerfication" component={SimplerOtpVerfication} options={{ headerShown: false }} />
         <Stack.Screen name="Logout" component={Logout} options={{ headerShown: false }} />
-        <Stack.Screen name="RadioLive" component={RadioLive} options={{ headerShown: false }}/>
         <Stack.Screen name="Sell Album" component={SellAlbum} options={{ headerShown: false }} />
+        <Stack.Screen name="Payment" component={Payment} options={{ headerShown: false }} />
+        <Stack.Screen name="Purchase" component={PurchasedAlbum} options={{ headerShown: false }} />
+        <Stack.Screen name="Download" component={Download} options={{ headerShown: false }} />
+        <Stack.Screen name="AlbumCatlog" component={AlbumCatlog} options={{ headerShown: false }} />
+
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import LottieView from 'lottie-react-native';
-import BG from '../../Assets/Images/image.jpeg'
+import BG from '../../Assets/Images/muss.jpeg'
 import styles from '../../Assets/css/style';
 import { useNavigation } from '@react-navigation/native';
 import Email from '../../Assets/Images/email.png'

@@ -29,11 +29,10 @@ export default class ApiServices extends React.Component {
     }
 
     getToken = async () => {
-        
         try {
             const value = await AsyncStorage.getItem('@token')
             if (value != null) {
-                
+                debugger
 
                 return value;
             }

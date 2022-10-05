@@ -24,6 +24,7 @@ export default class AppServices extends React.Component {
 
     };
 
+
     async getAlbumSongs(id) {
 
         var res = null;
@@ -174,7 +175,7 @@ export default class AppServices extends React.Component {
 
 
     };
-    async storeRegisterArtist(name, email, password, confirmPassword ,city, state,zipCode,country) {
+    async storeRegisterArtist(name, email, password, confirmPassword, city, state, zipCode, country) {
         var res = null;
 
         const body = {
@@ -182,10 +183,10 @@ export default class AppServices extends React.Component {
             email: email,
             password: password,
             password_confirmation: confirmPassword,
-            city:city,
-            state:state,
-            zip:zipCode,
-            country:country
+            city: city,
+            state: state,
+            zip: zipCode,
+            country: country
         }
         debugger
         try {
@@ -221,6 +222,80 @@ export default class AppServices extends React.Component {
 
 
     };
+    async fetchPayment(type, type_id, token) {
+
+         
+        var res = null;
+     
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        };
+        const body = {
+            type: type,
+            type_id: type_id,
+        }
+        debugger
+        try {
+            await axios.post("https://hgcradio.org/api/payment-token", body, { headers: headers }).then((response) => {
+                res = response;
+                debugger
+
+            });
+        } catch (error) {
+            return res = error;
+        }
+        return res;
+
+
+    };
+
+
+    async previousPayment(token) {
+
+        var res = null;
+     
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        };
+        try {
+            await axios.get("https://hgcradio.org/api/purhcased/music", { headers: headers }).then((response) => {
+                res = response;
+
+            });
+        } catch (error) {
+            return res = error;
+        }
+        return res;
+
+
+    };
+
+    async downloadSong(token, id) {
+
+        var res = null;
+     
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        };
+        debugger
+        try {
+            await axios.get("https://hgcradio.org/api/purhcased/album/" + id, { headers: headers }).then((response) => {
+                res = response;
+
+            });
+        } catch (error) {
+            return res = error;
+        }
+        return res;
+
+
+    };
 
     async OTPVerify(otp) {
         var res = null;
@@ -242,7 +317,7 @@ export default class AppServices extends React.Component {
 
     }
 
-    async RegisterOTPVerify(email,otp) {
+    async RegisterOTPVerify(email, otp) {
         var res = null;
         const body = {
             email: email,

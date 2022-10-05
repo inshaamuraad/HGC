@@ -12,10 +12,10 @@ const Header = () => {
       <View style={{}}>
     <View style={{ flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 10 }}>
     <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-      <Icon name="align-right" size={20} color="#fff" />
+      <Icon name="align-right" size={20} color="#031489" />
     </TouchableOpacity>
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold' }}>{route.name}</Text>
+      <Text style={{ alignSelf: 'center', color: '#031489', fontWeight: 'bold' }}>{route.name}</Text>
     </View>
   </View>
   </View>

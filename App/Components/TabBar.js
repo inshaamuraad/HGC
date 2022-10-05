@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -20,11 +20,11 @@ export default function TabBar({ state, descriptors }) {
             flex: 1
         }}>
             <TouchableOpacity onPress={() => handleClick(text)}>
-            <Ionicons name={isFocused?focusicon:icon} size={26} color="#9948a3" />
+            <Ionicons name={isFocused?focusicon:icon} size={26} color="#031489" />
             </TouchableOpacity>
             <Text style={{
                 fontSize: 10,
-                color: '#fff'
+                color: '#031489'
             }}>{text}</Text>
         </View>);
     }
@@ -34,8 +34,8 @@ export default function TabBar({ state, descriptors }) {
             case "Home":
                 navigation.navigate('HomeScreen')
                 break;
-            case "Album Catlog":
-                navigation.navigate('AlbumCatlog')
+            case "RadioLive":
+                navigation.navigate('RadioLive')
                 break;
             default:
                 break;
@@ -43,7 +43,7 @@ export default function TabBar({ state, descriptors }) {
     }
 
     return (
-        <View style={{ flexDirection: 'row', backgroundColor: '#333030',paddingBottom:20,padding:10,
+        <View style={{ flexDirection: 'row', backgroundColor: '#e3e3e3e3',paddingBottom:20,padding:10,
              shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
@@ -53,8 +53,8 @@ export default function TabBar({ state, descriptors }) {
                 shadowRadius: 10.32,
                 elevation: 8,
         }}>
-            <MainIcon text="Home"  icon="home-outline" focusicon="home" index={0}></MainIcon>
-            <MainIcon text="Album Catlog" icon="albums-outline" focusicon="albums" index={1} ></MainIcon>
+            <MainIcon text="Home"  icon="home" focusicon="home" index={0}></MainIcon>
+            <MainIcon text="RadioLive" icon="popup" focusicon="popup" index={1} ></MainIcon>
         </View>
 
     );

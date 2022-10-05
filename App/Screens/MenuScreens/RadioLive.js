@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, ImageBackground, Image } from 'react-native';
+
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, ImageBackground, Image, Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Play from 'react-native-vector-icons/AntDesign';
-import BG from '../../../Assets/Images/girl.jpeg'
+import BG from '../../../Assets/Images/musiccc.jpeg'
 import DownArrow from 'react-native-vector-icons/Feather';
 import TrackPlayer, { State } from 'react-native-track-player';
 import LottieView from 'lottie-react-native';
@@ -11,8 +12,12 @@ import TimedSlideshow from 'react-native-timed-slideshow';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from '../../../Assets/css/style';
 import AppServices from '../../Server/AppServices';
+import Playy from '../../../Assets/Images/playy.webp'
+import PARTNER from '../../../Assets/Images/pp.webp'
+import Pausee from '../../../Assets/Images/pause.png'
+import Carousel from 'react-native-snap-carousel';
 const trackPlayerInit = async () => {
-    await TrackPlayer.stop()
+
     await TrackPlayer.add([{
         // id: '1',
         // url:'https://my.hgcradio.org:8000/radio.mp3',
@@ -39,6 +44,18 @@ export default function RadioLive({ navigation }) {
     const [titleName, settitleName] = useState('')
     const [process, setprocess] = useState(false)
     const [albumName, setalbumName] = useState('')
+    const [url, seturl] = useState('')
+    const carouselRef = useRef('')
+    const carouselItems = [
+        {
+            url: require('../../../Assets/Images/HgcBanner.jpeg'),
+        },
+        {
+            url: require('../../../Assets/Images/hgctt.png'),
+        },
+
+
+    ]
     //initialize the TrackPlayer when the App component is mounted
     useEffect(() => {
         if (isFocused) {
@@ -52,15 +69,45 @@ export default function RadioLive({ navigation }) {
     const items = [
         {
             uri: "https://hgcradio.org/public/front/images/radio-banner.jpg",
-
         },
         {
             uri: require('../../../Assets/Images/black.jpeg'),
-            title: "Advertise Here !!",
-            text: "EMAIL US, radio@hallelujahgospel.com",
         },
 
     ]
+
+
+
+    const _renderItem = ({ item, index }) => {
+        return (
+            <View style={{
+                shadowOffset: {
+                    width: 0,
+                    height: 12,
+                },
+                shadowOpacity: 0.58,
+                shadowRadius: 16.00,
+                elevation: 20,
+            }}>
+                <Image style={{ height: 150, width: 250, resizeMode: 'contain' }} source={item.url} />
+                {/* <View style={{
+              position: 'absolute', backgroundColor: '#0009', borderRadius: 20,
+              height: 150,
+              padding: 50,
+              marginLeft: 25,
+              marginRight: 25,
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: 230,
+            }}>
+              <Text style={{ color: '#e7e7e7e7', fontWeight: 'bold', fontSize: 11 }}>
+                Hallelujah Choice Radio
+              </Text>
+            </View> */}
+
+            </View >
+        )
+    }
 
     //start playing the TrackPlayer when the button is pressed 
     const onButtonPressed = async () => {
@@ -79,7 +126,14 @@ export default function RadioLive({ navigation }) {
     useEffect(() => {
         nowPlayingSong()
     }, [])
-
+    function EmptySpace() {
+        return (
+            <>
+                <View style={{ height: 0, width: 0 }}>
+                </View>
+            </>
+        )
+    }
 
     const nowPlayingSong = async () => {
         setprocess(true)
@@ -87,9 +141,12 @@ export default function RadioLive({ navigation }) {
         var res = await Storage.getCurrentSong();
         try {
             if (res.data) {
+
                 let albumData = res.data.data.now_playing
+                let albumDataa = res.data.data.show
                 settitleName(albumData.text)
                 setalbumName(albumData.artist)
+                seturl(albumDataa.host_image)
             }
         } catch (err) {
             setprocess(false)
@@ -101,16 +158,16 @@ export default function RadioLive({ navigation }) {
 
     return (
 
-        <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4F4C4D', '#ffffff00',]} style={styles.body}>
-            <ScrollView style={{ flex: 1, alignSelf: "stretch", backgroundColor: "#000000AA" }}
+        <ImageBackground source={BG} style={styles.body}>
+            <ScrollView style={{ flex: 1, alignSelf: "stretch", backgroundColor: "#0009" }}
                 contentContainerStyle={{ flex: 1 }}
                 contentContainerStyle={{ flexGrow: 1 }}
             >
                 <View style={{ flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 60 }}>
-                    <TouchableOpacity onPress={() => navigation.pop()}>
+                    {/* <TouchableOpacity onPress={() => navigation.pop()} style={{ width: 50 }}>
                         <Icon name="arrow-left" size={20} color="#fff" />
-                    </TouchableOpacity>
-                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    </TouchableOpacity> */}
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginRight: 10 }}>
                         <Text style={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold' }}>NOW ON AIR</Text>
                     </View>
                 </View>
@@ -128,9 +185,8 @@ export default function RadioLive({ navigation }) {
                         height: 260,
                         justifyContent: "center",
                         alignItems: 'center',
-                        marginVertical: 60
+                        marginVertical: 30
                     }}>
-                        <LottieView source={require('../../../Assets/Lottie/circleWave.json')} style={{ width: 330, height: 330 }} autoPlay loop />
                         <View
                             style={{
                                 width: "100%",
@@ -141,8 +197,8 @@ export default function RadioLive({ navigation }) {
                             }}
                         >
                             <TouchableOpacity style={{
-                                width: 180,
-                                height: 180,
+                                width: 220,
+                                height: 220,
                                 borderRadius: 1000,
                                 justifyContent: 'center',
                                 alignItems: 'center',
@@ -156,58 +212,96 @@ export default function RadioLive({ navigation }) {
                                 shadowRadius: 16.00,
                                 elevation: 24,
                                 backgroundColor: '#1E0F2F',
-                                marginBottom: 80
-                            }} onPress={() => onButtonPressed()}>
-                                <Image source={BG} style={{
+                                marginBottom: 150
+                            }}>
+                                <Image source={{ uri: url }} style={{
+                                    width: 200,
+                                    height: 200,
+                                    borderRadius: 1000,
+                                }} />
+
+
+                                <View style={{
                                     width: 180,
                                     height: 180,
                                     borderRadius: 1000,
-                                }} />
+                                    position: 'absolute',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+
+                                    <View style={{
+                                        width: 170,
+                                        height: 170,
+                                        borderRadius: 1000,
+                                        position: 'absolute',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        borderWidth: 5, borderColor: '#fff'
+                                    }}>
+
+
+                                        <TouchableOpacity onPress={() => onButtonPressed()}>
+                                            {isPlaying ?
+                                                <Image source={Pausee} style={{
+                                                    width: 150,
+                                                    height: 150,
+                                                    borderRadius: 1000,
+                                                }} />
+                                                :
+                                                <Image source={Playy} style={{
+                                                    width: 150,
+                                                    height: 150,
+                                                    borderRadius : 1000,
+                                                }} />
+                                            }
+                                        </TouchableOpacity>
+                                    </View>
+
+                                </View>
                             </TouchableOpacity>
 
                         </View>
-                        <View style={{ flexDirection: 'row', marginVertical: 20, alignItems: 'center' }}>
-                            <View style={{ paddingHorizontal: 50 }}>
-                                <Text style={{ color: '#CB3BF7', fontSize: 12, fontWeight: 'bold' }}>{titleName}</Text>
-                                <Text style={{ color: '#fff', fontSize: 9, fontWeight: 'bold', paddingLeft: 9 }}>{albumName}</Text>
-                            </View>
-                            <TouchableOpacity style={{
-                                width: 50,
-                                height: 50,
-                                borderRadius: 99,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                borderRadius: 999,
-                                shadowColor: '#CB3BF7',
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 12,
-                                },
-                                shadowOpacity: 0.58,
-                                shadowRadius: 16.00,
-                                elevation: 24,
-                                backgroundColor: '#ff0065',
-                                marginHorizontal: 50
-                            }} onPress={() => onButtonPressed()}>
-                                <TouchableOpacity onPress={() => onButtonPressed()}>
-                                    {isPlaying ?
-                                        <Icon name="pause" size={10} color="#fff" /> :
-                                        <Icon name="play" size={10} color="#fff" />}
-                                </TouchableOpacity>
-                            </TouchableOpacity>
+                        <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 200 }}>
+                            <Text style={{ color: '#fff', fontSize: 16, fontWeight: 'bold', marginTop: 30 }}>Playing Now</Text>
+
+                            <Text style={{ color: '#e3e3e3', fontSize: 12, fontWeight: 'bold', marginTop: 13 }}>{titleName}</Text>
+                            <Text style={{ color: '#10a8ab', fontSize: 12, fontWeight: 'bold', marginTop: 10 }}>{albumName}</Text>
+                            {isPlaying ?
+                                <LottieView source={require('../../../Assets/Lottie/wave.json')} style={{ width: 40, height: 40, marginTop: 5 }} autoPlay loop />
+
+                                :
+                                <LottieView source={require('../../../Assets/Lottie/wave.json')} style={{ width: 40, height: 40, marginTop: 5 }} autoPlay loop />
+
+                            }
                         </View>
                     </View>
+
                 </View>
-                <View style={{ width: '100%', height: 100, paddingBottom: 50, marginTop: 200 }}>
-                    <TimedSlideshow
-                        items={items}
-                        onClose={() => setclose(false)}
-                        showProgressBar={true}
-                    />
+                <TouchableOpacity style={{alignSelf : 'center', marginTop: 20}}
+                onPress={() => Linking.openURL('https://hgcradio.org/payments/initiate')}>
+                    {/* <Image style={{ height: 80, width: 130, borderRadius: 20, resizeMode: 'contain' ,}} source={PARTNER} /> */}
+
+                </TouchableOpacity>
+
+
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 20, marginBottom: 30 }}>
+                    <Carousel
+                        layout={"default"}
+                        ref={carouselRef}
+                        data={carouselItems}
+                        sliderWidth={500}
+                        itemWidth={350}
+                        renderItem={_renderItem}
+                        contentContainerStyle={{ marginTop: 70 }}
+                        autoplay={true}
+                        loop={true} />
                 </View>
+
             </ScrollView>
-        </LinearGradient>
+        </ImageBackground>
 
     );
 }
+
 

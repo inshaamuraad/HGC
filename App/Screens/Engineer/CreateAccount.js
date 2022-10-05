@@ -47,69 +47,69 @@ export default function CreatAcount() {
 
   return (
     <SafeAreaView style={styles.body}>
-      <Text style={{ paddingTop: 40, paddingHorizontal: 20, fontSize: 16, color: '#CB3BF7', fontWeight: 'bold' }}>Create An Account
+      <Text style={{ paddingTop: 40, paddingHorizontal: 20, fontSize: 16, color: '#031489', fontWeight: 'bold' }}>Create An Account
       </Text>
       <ScrollView>
-        <View style={[styles.InputContainer, { marginTop: 30, borderColor: '#292929' }]}>
+        <View style={[styles.InputContainer, { marginTop: 30 }]}>
           <TextInput placeholder="First Name"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setname(text)}
-            style={{ color: '#fff' }}
+            style={{ color: '#031489' }}
 
           />
         </View>
-        <View style={[styles.InputContainer, { borderColor: '#292929' }]}>
+        <View style={[styles.InputContainer]}>
           <TextInput placeholder="Enter Email"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setemail(text)}
-            style={{ color: '#fff' }}
+            style={{ color: '#031489' }}
           />
         </View>
-        <View style={[styles.InputContainer, { borderColor: '#292929' }]}>
+        <View style={[styles.InputContainer]}>
           <TextInput placeholder="Password"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setPassword(text)}
-            style={{ color: '#fff' }}
+            style={{ color: '#031489' }}
 
           />
         </View>
-        <View style={[styles.InputContainer, { borderColor: '#292929' }]}>
+        <View style={[styles.InputContainer]}>
           <TextInput placeholder="Confirm Password"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setconfirmPassword(text)}
-            style={{ color: '#fff' }}
+            style={{ color: '#031489' }}
 
           />
         </View>
-        <View style={[styles.InputContainer, { borderColor: '#292929' }]}>
+        <View style={[styles.InputContainer]}>
           <TextInput placeholder="Country"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setcountry(text)}
-            style={{ color: '#fff' }}
+            style={{ color: '#031489' }}
 
           />
         </View>
-        <View style={[styles.InputContainer, { borderColor: '#292929' }]}>
+        <View style={[styles.InputContainer]}>
           <TextInput placeholder="City"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setcity(text)}
-            style={{ color: '#fff' }}
+            style={{ color: '#031489' }}
 
           />
         </View>
 
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <View style={[styles.InputContainerDouble, { borderColor: '#292929' }]}>
+          <View style={[styles.InputContainerDouble]}>
             <TextInput placeholder="Enter State"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#031489"
               onChangeText={(text) => setstate(text)}
-              style={{ color: "#fff" }} />
+              style={{ color: "#031489" }} />
           </View>
-          <View style={[styles.InputContainerDouble, { borderColor: '#292929' }]}>
+          <View style={[styles.InputContainerDouble]}>
             <TextInput placeholder="Zip Code"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#031489"
               onChangeText={(text) => setzipCode(text)}
-              style={{ color: '#fff' }}
+              style={{ color: '#031489' }}
 
             />
           </View>
@@ -117,7 +117,7 @@ export default function CreatAcount() {
 
         <Button
           mode="contained"
-          style={[styles.btnContainer, { backgroundColor: '#4F1769' }]}
+          style={[styles.btnContainer, { backgroundColor: '#031489' }]}
           onPress={() => getContact()}>
           SUBMIT
         </Button>
@@ -142,7 +142,7 @@ export default function CreatAcount() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-      <DownMusicBar />
+      {/* <DownMusicBar /> */}
     </SafeAreaView>
   );
 }

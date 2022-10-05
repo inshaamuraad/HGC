@@ -80,7 +80,7 @@ export default function WeeklySchedule({ route }) {
       return (
         <View style={{ paddingVertical: 10 }}>
           <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-            <Image source={Nodata} style={{ width: 130, tintColor: '#fff', height: 130 }} />
+            <Image source={Nodata} style={{ width: 130, tintColor: '#000', height: 130 }} />
           </View>
         </View>
       )
@@ -93,17 +93,17 @@ export default function WeeklySchedule({ route }) {
           flexDirection: "row",
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderColor: "#fff",
-          borderWidth: 1
+          borderColor: "#031489",
+          borderWidth: 1, elevation: 4
         }}>
-          <Text style={{ fontSize: 12, fontWeight: 'bold', color: "#CB3BF7", paddingVertical: 5 }}>{item.show.name}</Text>
+          <Text style={{ fontSize: 12, fontWeight: 'bold', color: "#031489", paddingVertical: 5 }}>{item.show.name}</Text>
           <View style={{ flexDirection: 'row', alignItems: "center" }}>
             <Icon name="arrow-down-right" size={10} color="green" />
-            <Text style={{ fontSize: 8, fontSize: 10, color: '#CB3BF7' }}>{item.from_time}</Text>
+            <Text style={{ fontSize: 8, fontSize: 10, color: '#031489' }}>{item.from_time}</Text>
           </View>
           <View style={{ flexDirection: 'row', alignItems: "center" }}>
             <Icon name="arrow-up-left" size={10} color="red" />
-            <Text style={{ fontSize: 8, fontSize: 10, color: '#CB3BF7' }}>{item.to_time}</Text>
+            <Text style={{ fontSize: 8, fontSize: 10, color: '#031489' }}>{item.to_time}</Text>
           </View>
         </TouchableOpacity>
       )
@@ -135,23 +135,23 @@ export default function WeeklySchedule({ route }) {
 
         <View style={{ flexDirection: 'row' }}>
           <View style={{ paddingHorizontal: 4 }}>
-            <Image source={comment} style={{ width: 30, height: 30, resizeMode: 'contain', tintColor: '#fff' }} />
+            <Image source={comment} style={{ width: 30, height: 30, resizeMode: 'contain', tintColor: '#031489' }} />
           </View>
           <View style={{ justifyContent: 'center' }}>
-            <Text style={{ fontSize: 10, marginTop: 1, color: '#fff', fontWeight: 'bold' }}>{item.name}</Text>
-            <Text style={{ fontSize: 6, marginTop: 2, color: '#fff' }}>{item.email}</Text>
+            <Text style={{ fontSize: 10, marginTop: 1, color: '#000', fontWeight: 'bold' }}>{item.name}</Text>
+            <Text style={{ fontSize: 6, marginTop: 2, color: '#000' }}>{item.email}</Text>
           </View>
         </View>
 
-        <Text style={{ fontSize: 10, marginTop: 5, color: '#fff' }}>{item.comment}</Text>
+        <Text style={{ fontSize: 10, marginTop: 5, color: '#000' }}>{item.comment}</Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text></Text>
-          <Text style={{ fontSize: 6, marginTop: 5, color: 'yellow', right: 0, }}>{Moment(item.created_at).format('MMM hh:mm:ss')}</Text>
+          <Text style={{ fontSize: 6, marginTop: 5, color: '#031489', right: 0, }}>{Moment(item.created_at).format('MMM hh:mm:ss')}</Text>
         </View>
         <View>
 
         </View>
-        <View style={{ width: '100%', height: 0.7, borderWidth: 0.2, borderColor: '#9948a3', marginTop: 5 }}></View>
+        <View style={{ width: '100%', height: 0.7, borderWidth: 0.2, borderColor: '#031489', marginTop: 5 }}></View>
       </View>
     )
 
@@ -160,13 +160,12 @@ export default function WeeklySchedule({ route }) {
 
   return (
     <SafeAreaView style={styles.body}>
-
       <View style={{ flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 20 }}>
-        <TouchableOpacity onPress={() => navigation.pop()}>
-          <DownArrow name="arrow-left" size={20} color="#fff" />
+        <TouchableOpacity onPress={() => navigation.pop()} style={{ width: 50 }}>
+          <DownArrow name="arrow-left" size={20} color="#031489" />
         </TouchableOpacity>
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold' }}>{routee.name}</Text>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginRight: 30 }}>
+          <Text style={{ alignSelf: 'center', color: '#031489', fontWeight: 'bold' }}>{routee.name}</Text>
         </View>
       </View>
       <View style={{ flexDirection: 'row' }}>
@@ -184,9 +183,9 @@ export default function WeeklySchedule({ route }) {
           <Image source={{ uri: url }} style={{ width: 90, height: 90, resizeMode: 'contain' }} />
         </View>
         <View style={{ justifyContent: 'center' }}>
-          <Text style={{ fontSize: 12, marginTop: 1, color: '#fff', fontWeight: 'bold' }}>Albums : {name}</Text>
-          <Text style={{ fontSize: 10, marginTop: 5, color: '#fff' }}>Email : {email}</Text>
-          <Text style={{ fontSize: 10, marginTop: 5, color: '#fff' }}>Slug : {slug}</Text>
+          <Text style={{ fontSize: 12, marginTop: 1, color: '#031489', fontWeight: 'bold' }}>Albums : {name}</Text>
+          <Text style={{ fontSize: 10, marginTop: 5, color: '#000' }}>Email : {email}</Text>
+          <Text style={{ fontSize: 10, marginTop: 5, color: '#000' }}>Slug : {slug}</Text>
 
         </View>
 
@@ -199,6 +198,7 @@ export default function WeeklySchedule({ route }) {
       <View style={{ marginVertical: 20, zIndex: chechVerify == true ? 0 : 3000, marginHorizontal: 10 }}>
 
         <DropDownPicker
+          listMode='MODAL'
           open={open}
           value={value}
           items={ScheduleData}
@@ -212,16 +212,23 @@ export default function WeeklySchedule({ route }) {
 
         />
       </View>
-      <View style={[styles.columnRadius, { marginVertical: 5, marginHorizontal: 20, backgroundColor: 'transparent' }]}>
-        <FlatList
-          data={hostAlbums}
-          renderItem={_reviewitem}
-          keyExtractor={item => item.id}
-        />
-      </View>
+      {value ?
+
+        <View style={[styles.columnRadius, { marginVertical: 5, marginHorizontal: 20, backgroundColor: 'transparent' }]}>
+          <FlatList
+            data={hostAlbums}
+            renderItem={_reviewitem}
+            keyExtractor={item => item.id}
+          />
+        </View>
+        :
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  <Image source={Nodata} style={{ width: 130, height: 130 , tintColor:'#031489'}} />
+
+        </View>}
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 15, marginHorizontal: 20, }}>
-        <Text style={{ color: '#9948a3', fontWeight: 'bold' }}>Comments</Text>
+        <Text style={{ color: '#031489', fontWeight: 'bold' }}>Comments</Text>
       </View>
       <View style={[styles.columnRadius, { marginVertical: 5, marginHorizontal: 20, backgroundColor: 'transparent' }]}>
         <FlatList
@@ -230,6 +237,7 @@ export default function WeeklySchedule({ route }) {
           keyExtractor={item => item.id}
         />
       </View>
+   
       <TouchableOpacity
         style={styles.floatingButton}
         onPress={() => navigation.navigate('Comment', {
@@ -241,6 +249,7 @@ export default function WeeklySchedule({ route }) {
       {process == true &&
         <Loading />
       }
+
     </SafeAreaView>
 
   );

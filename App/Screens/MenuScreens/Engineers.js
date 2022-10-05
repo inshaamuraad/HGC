@@ -7,15 +7,18 @@ import Header from '../../Components/Header';
 import AppServices from '../../Server/AppServices';
 import { Searchbar } from 'react-native-paper';
 import Loading from '../../Components/Loading';
+import { useIsFocused } from '@react-navigation/core';
+
 export default function Engineers({ navigation }) {
   const [search, setSearch] = useState('');
   const [albums, setalbums] = useState([])
   const [process, setprocess] = useState(false)
   const [filterData, setFilterData] = useState([])
+  const focus = useIsFocused()
 
   useEffect(() => {
-    getAlbumsCatelog();
-  }, [])
+    focus && getAlbumsCatelog();
+  }, [focus])
   const getAlbumsCatelog = async () => {
     setprocess(true)
     const Storage = new AppServices();
@@ -45,24 +48,34 @@ export default function Engineers({ navigation }) {
   };
   const renderItem = ({ item }) => {
     return (
-      <View style={{ margin: 10, }}>
-        <TouchableOpacity style={{height: 100, width: 100, borderRadius: 99, alignSelf: 'center',borderColor:'#4F4C4D',borderWidth:2 ,shadowOffset: {
-            width: 0,
-            height: 15,
-            borderRadius: 99
-          },
-          shadowOpacity: 0.40,
-          shadowRadius: 10.00,
-          elevation: 50, shadowColor: '#CB3BF7'}} onPress={() => navigation.navigate('WeeklySchedule', {
-          id: item.id
-        })}>
-          <Image source={{ uri: item.avatar_url }} style={{ height: 98, width: 98, borderRadius: 99}} />
+      <View
+        style={{
+          width: 70,
+          alignItems: 'center',
+          marginLeft: 6,
+          paddingHorizontal: 2,
+          margin: 10
+        }}
+      >
+        <TouchableOpacity
+          style={{ width: 70, height: 70 }}
+          onPress={() =>
+            navigation.navigate('WeeklySchedule', {
+              id: item.id,
+            })
+          }
+        >
+          <Image
+            source={{ uri: item.avatar_url }}
+            style={{ width: '100%', height: '100%', borderRadius: 5 }}
+            resizeMode="cover"
+          />
         </TouchableOpacity>
-          <Text style={{ fontSize: 11, color: '#CB3BF7', alignSelf: 'center', marginTop: 15 }}>{item.name}</Text>
-          <Text style={{ fontSize: 10, color: '#CB3BF7', alignSelf: 'center',marginTop: 5 }}>{item.email}</Text>
-          <Text style={{ fontSize: 9, color: '#CB3BF7', alignSelf: 'center', marginTop: 5 }}>{item.slug}</Text>
-
-     
+        <View style={{ width: 67, alignSelf: 'center' }}>
+          <Text style={{ fontSize: 12, color: '#031489', marginTop: 15, alignSelf:'center', fontWeight:'bold' }}>
+            {item.name}
+          </Text>
+        </View>
       </View>
     )
   }
@@ -72,26 +85,38 @@ export default function Engineers({ navigation }) {
       <View style={{ paddingVertical: 10 }}>
         <Header />
       </View>
-      <View style={{ marginTop: 30, paddingHorizontal: 30,alignSelf:'center' }}>
+      <View style={{ marginTop: 30, paddingHorizontal: 10, alignSelf: 'center' }}>
         <Searchbar
           style={styles.SearchContainer}
           placeholder="Search Album"
-          placeholderTextColor="#fff"
+          placeholderTextColor="#031489"
           autoCapitalize="none"
-          iconColor="#fff"
+          iconColor="#031489"
           onChangeText={(text) => searchFilterFunction(text)}
-          inputStyle={{ fontSize: 12, color: '#CB3BF7' }}
+          inputStyle={{ fontSize: 12, color: '#031489' }}
         />
       </View>
-      <View style={{ marginTop: 20 }}>
-        <FlatList
-          data={filterData}
-          numColumns={2}
-          columnWrapperStyle={{ justifyContent:'space-around' }}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-        />
-      </View>
+
+
+
+      {filterData.length == 0 ?
+
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <Text style={{ fontSize: 18 }}>No data found</Text>
+
+        </View> :
+        <View style={{ marginTop: 50, marginHorizontal: 15, }}>
+          <FlatList
+            data={filterData}
+            numColumns={4}
+            columnWrapperStyle={{ justifyContent:'flex-start'}}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        </View>}
+
+      <DownMusicBar />
+
       {process == true &&
         <Loading />
       }

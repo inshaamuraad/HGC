@@ -13,7 +13,7 @@ import DownArrow from 'react-native-vector-icons/Feather';
 export default function Comments({ route }) {
 
     const { params } = route
-  const routee = useRoute();
+    const routee = useRoute();
     const navigation = useNavigation()
     const [name, setname] = useState('')
     const [email, setemail] = useState('')
@@ -50,59 +50,76 @@ export default function Comments({ route }) {
     return (
         <SafeAreaView style={styles.body}>
             <View style={{ flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 20 }}>
-                <TouchableOpacity onPress={() => navigation.pop()}>
-                    <DownArrow name="arrow-left" size={20} color="#fff" />
+                <TouchableOpacity onPress={() => navigation.pop()} style={{ width: 80 }}>
+                    <DownArrow name="arrow-left" size={20} color="#031489" />
                 </TouchableOpacity>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold' }}>{routee.name}</Text>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginRight: 50}}>
+                    <Text style={{ alignSelf: 'center', color: '#031489', fontWeight: 'bold' }}>{routee.name}</Text>
                 </View>
             </View>
             <ScrollView>
                 <View style={[styles.InputContainer, { marginTop: 30 }]}>
                     <TextInput placeholder="First Name"
-                        placeholderTextColor="#fff"
+                        placeholderTextColor="#031489"
                         onChangeText={(text) => setname(text)}
+                style={{ color: "#031489" }}
+
                     />
                 </View>
                 <View style={[styles.InputContainer]}>
                     <TextInput placeholder="Enter Email"
-                        placeholderTextColor="#fff"
+                        placeholderTextColor="#031489"
                         onChangeText={(text) => setemail(text)}
+                style={{ color: "#031489" }}
+
                     />
                 </View>
                 <View style={[styles.InputContainer]}>
                     <TextInput placeholder="Country"
-                        placeholderTextColor="#fff"
+                        placeholderTextColor="#031489"
                         onChangeText={(text) => setcountry(text)}
+                style={{ color: "#031489" }}
+
                     />
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                    <View style={[styles.InputContainerDouble]}>
+                    <View style={[styles.InputContainerDouble, {  width: 180,}]}>
                         <TextInput placeholder="Enter City"
-                            placeholderTextColor="#fff"
+                            placeholderTextColor="#031489"
                             onChangeText={(text) => setcity(text)}
+                style={{ color: "#031489" }}
+
                         />
                     </View>
-                    <View style={[styles.InputContainerDouble]}>
+                    <View style={[styles.InputContainerDouble, {  width: 180,}]}>
                         <TextInput placeholder="Enter State"
-                            placeholderTextColor="#fff"
+                            placeholderTextColor="#031489"
                             onChangeText={(text) => setstate(text)}
+                style={{ color: "#031489" }}
+
                         />
                     </View>
                 </View>
                 <View style={{
-                    height: 250,
-                    backgroundColor: '#000',
+                   height :40,
+                    backgroundColor: '#fff',
                     borderWidth: 0.8,
                     borderRadius: 20,
                     paddingHorizontal: 20,
                     marginHorizontal: 10,
                     marginVertical: 4,
-                    borderColor: '#CB3BF7'
+                    borderColor: '#fff',
+                    elevation: 10,
+                    shadowOffset: {
+                        width: 0,
+                        height: 12,
+                    },
+                    shadowOpacity: 0.58,
+                    shadowRadius: 16.00,
 
                 }}>
                     <TextInput placeholder="Enter Message"
-                        placeholderTextColor="#fff"
+                        placeholderTextColor="#031489"
                         onChangeText={(text) => setmessage(text)}
                         multiline />
                 </View>

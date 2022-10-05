@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native';
-import BG from '../../../Assets/Images/image.jpeg'
+import BG from '../../../Assets/Images/muss.jpeg'
 import HD from '../../../Assets/Images/headPhone.png'
 import styles from '../../../Assets/css/style';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -8,6 +8,7 @@ import { useNavigation } from '@react-navigation/core';
 import AppServices from '../../Server/AppServices';
 import ApiServices from '../../Server/ApiServices';
 import Validation from '../../Components/Validation';
+import Logo from '../../../Assets/Icons/Logo.png'
 
 const Login = () => {
     const navigation = useNavigation();
@@ -30,7 +31,7 @@ const Login = () => {
         try {
             if (checkEmail == true && checkPassword == true) {
                 let res = await Storage.storeLoginData(email.toLowerCase(), password)
-                debugger
+                
                 if (res.data.status == "Success") {
                     const data = res.data.data
                     var u_name = data.user.name ? data.user.name : ''
@@ -47,15 +48,15 @@ const Login = () => {
                         u_type,
                         token
                     )
-                    debugger
-
+                    
                     if (flag) {
-                        debugger
+                        
                         navigation.navigate('HomeScreen')
+                        alert('Login Successfully')
                     }
 
                 } else if (res.response.data.message) {
-                    debugger
+                    
 
                 }
             } else {
@@ -68,7 +69,7 @@ const Login = () => {
             }
         }
         catch (error) {
-            debugger
+            
             if (res == true) {
                 alert('Kindly procede with email verification before trying to login')
                 setallAlert(false)
@@ -85,14 +86,15 @@ const Login = () => {
                 contentContainerStyle={{ flexGrow: 1 }}
             >
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={HD} style={{ width: 100, height: 100 }} />
+                    <View style={{ width: 150, height: 150, borderRadius: 999, borderWidth: 4, alignItems: 'center', justifyContent: 'center', borderColor: '#031489' }}>
+                        <Image style={{ width: 120, height: 120 }} source={Logo} />
+                    </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: 30, borderRadius: 100, marginTop: 30 }}>
                         <TextInput
                             style={[styles.textInput, { borderRadius: 20, backgroundColor: 'transparent', borderWidth: 1, borderColor: 'gray', fontSize: 12, color: '#fff' }]}
                             placeholder="Enter Your Email ID"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#fff"
                             onChangeText={text => setEmail(text)}
-
                         />
                     </View>
                     {allAlert == "1" && <>
@@ -108,9 +110,8 @@ const Login = () => {
                             style={[styles.textInput, { borderRadius: 20, backgroundColor: 'transparent', borderWidth: 1, borderColor: 'gray', fontSize: 12, color: '#fff' }]}
                             placeholder="Enter Your Password"
                             secureTextEntry={texttype}
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#fff"
                             onChangeText={text => setPassword(text)}
-
                         />
                         <TouchableOpacity
                             style={{ paddingRight: 20, paddingBottom: 5, position: 'absolute', right: 0, justifyContent: 'center', alignItems: 'center', }}
@@ -121,18 +122,15 @@ const Login = () => {
                                 <Icon name="eye" size={15} color="#fff" />
                             )}
                         </TouchableOpacity>
-
                     </View>
                     {allAlert == "2" && <>
                         <Text
                             style={{
-                                fontSize: 12, color: "#B98E00", bottom: 5, marginRight: '50%'
+                                fontSize: 12, color: "#031489", bottom: 5, marginRight: '50%'
                             }}
                         > * Enter Your Password
                         </Text>
                     </>}
-
-
                     <TouchableOpacity style={{ width: '100%' }} onPress={() => navigation.navigate('ForgotPassword')}>
                         <Text
                             style={{

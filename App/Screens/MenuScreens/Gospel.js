@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, SafeAreaView, FlatList, Dimensions, ImageBackground, ScrollView } from 'react-native';
 import TopMenu from '../../Components/TopMenu';
 import styles from '../../../Assets/css/style';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Ionicons from 'react-native-vector-icons/Entypo';
 import Header from '../../Components/Header';
 import LinearGradient from 'react-native-linear-gradient';
-
+import Loading from '../../Components/Loading';
+import { useIsFocused } from '@react-navigation/core';
+import TimedSlideshow from 'react-native-timed-slideshow';
+import LottieView from 'lottie-react-native';
+import { ImageSlider } from "react-native-image-slider-banner";
+import DownMusicBar from '../../Components/DownMusicBar';
+import AdvertiseList from '../../Components/AdvertiseList';
+import ImageLogo from '../../../Assets/Images/hgc.jpeg'
 
 export default function Gospel() {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const [process, setprocess] = useState(false)
+  const [close, setclose] = useState(false)
+  const win = Dimensions.get('window');
+  const ratio = win.width / 541; //541 is actual image width
   const [items, setItems] = useState([
     { label: 'Halelujah Glospel Globally', value: '0' },
     { label: 'Gospel Pipeline', value: '1' },
@@ -23,8 +34,26 @@ export default function Gospel() {
     { label: 'Gospel Templates ', value: '8' },
     { label: 'Gospel Sing Along ', value: '9' }
   ])
+  function EmptySpace() {
+    return (
+      <>
+        <View style={{ height: 0, width: 0 }}>
+        </View>
+      </>
+    )
+  }
+  const itemss = [
+    {
+      uri: "https://hgcradio.org/public/front/images/radio-banner.jpg",
 
+    },
+    {
+      uri: require('../../../Assets/Images/black.jpeg'),
+      title: "Advertise Here !!",
+      text: "EMAIL US, radio@hallelujahgospel.com",
+    },
 
+  ]
   const Data = [
     {
       id: 0,
@@ -73,21 +102,23 @@ export default function Gospel() {
 
       return (
 
-        <View style={{
+        <ImageBackground source ={ImageLogo} 
+        
+        
+        style={{
+          borderWidth: 1,
+          borderColor: '#031489',
+          elevation: 20,
+          borderRadius: 0,
+          marginHorizontal: 2, marginVertical: 20,
           
-          shadowOffset: {
-            width: 0,
-            height: 15,
-            borderRadius: 99
-          },
-          shadowOpacity: 0.20,
-          shadowRadius: 10.00,
-          elevation: 50, shadowColor: '#e7e7e7'
+          
+
         }}>
-          <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{ paddingHorizontal: 20, backgroundColor: "#e1e1e1", borderRadius: 10, marginTop: 10, paddingVertical: 10, }} colors={['#CB3BF7', '#ff0065',]}>
-            <Text style={{ paddingHorizontal: 10, color: '#000' }}>{item.title}</Text>
-          </LinearGradient>
-        </View>
+          <View style={{  borderRadius: 0,backgroundColor:'#0009',  paddingVertical: 10, }} >
+            <Text style={{ width : '100%',paddingHorizontal: 10, color: '#fff', fontWeight: 'bold', fontSize: 16 }}>{item.title}</Text>
+          </View>
+        </ImageBackground>
       )
     }
 
@@ -97,33 +128,58 @@ export default function Gospel() {
 
   return (
     <SafeAreaView style={styles.body}>
-      <View style={{ paddingVertical: 10 }}>
-        <Header />
-      </View>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, flex: 1 }}>
+        <View style={{ paddingVertical: 10 }}>
+          <Header />
+        </View>
+        <View style={{ paddingHorizontal: 5, zIndex: 1000, margin: 10 }}>
+          <DropDownPicker
+            listMode='MODAL'
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            placeholder="Pick Name"
 
-      <View style={{ paddingHorizontal: 20, paddingVertical: 10, zIndex: 3000, borderRadius: 20 }}>
+            zIndex={3000}
+            zIndexInverse={1000}
+            dropDownContainerStyle={{ backgroundColor: 'white', zIndexInverse: 2000, zIndexInverse: 2000 }}
+            autoCapitalize='none'
+          />
+        </View>
 
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          zIndex={3000}
-          PlaceholderTextColor="#fff"
-          placeholder="Pick Name"
-          style={{ borderRadius: 30, backgroundColor: '#4F1769',tintColor:'#ffffff' }}
-        
-        />
-      </View>
-      <View style={{ marginVertical: 20, paddingHorizontal: 15 }}>
-        <FlatList
-          data={Data}
-          renderItem={_reviewitem}
-          keyExtractor={item => item.id}
-        />
-      </View>
+
+
+        {value ?
+
+          <View style={{ marginVertical: 20, paddingHorizontal: 15, margin: 10 }}>
+            <FlatList
+              data={Data}
+              renderItem={_reviewitem}
+              keyExtractor={item => item.id}
+            />
+          </View>
+          :
+          <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+            <LottieView source={require('../../../Assets/Lottie/lf30_editor_jqrsupgs.json')} style={{ width: 180, height: 180 }} autoPlay loop />
+            <Text style={{ fontSize: 16, color: "#000" }}>No data found</Text>
+
+          </View>}
+
+
+        {process == true &&
+          <Loading />
+        }
+
+      </ScrollView>
+      <Text style={[styles.Text, { fontWeight: 'bold', color: "#031489", fontSize: 13, marginTop: 20, marginLeft: 20 , paddingVertical: 20}]}>GOSPEL PLATFORMS</Text>
+      <AdvertiseList />
+
+      <DownMusicBar />
+
+
     </SafeAreaView>
   );
 }

@@ -80,7 +80,7 @@ const BuyAlbum = ({ route }) => {
                 index: index,
                 albumSongs:params.id
             })}>
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#000', '#000',]}
+                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#fff', '#fff',]}
                     style={{
                         paddingVertical: 5, marginTop: 5, borderRadius: 7, paddingHorizontal: 10, shadowOffset: {
                             width: 0,
@@ -88,18 +88,19 @@ const BuyAlbum = ({ route }) => {
                         },
                         shadowOpacity: 0.60,
                         shadowRadius: 15.00,
-                        elevation: 10, shadowColor: '#000'
+                        elevation: 4, shadowColor: '#000',
+                        marginHorizontal: 2
                     }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', }}>
                             <Image source={{ uri: params.url }} style={{ width: 70, height: 70, borderRadius: 5 }} />
                             <View style={{ marginLeft: 10, justifyContent: 'center' }}>
-                                <Text style={[styles.Text, { fontSize: 14, color: '#CB3BF7' }]}>{item.title}</Text>
-                                <Text style={[styles.Text, { fontSize: 8 }]}>{item.artist_name}</Text>
+                                <Text style={[styles.Text, { fontSize: 14, color: '#031489', fontWeight:'bold' }]}>{item.title}</Text>
+                                <Text style={[styles.Text, { fontSize: 11,  color: '#000' }]}>{item.artist_name}</Text>
                             </View>
                         </View>
                         <TouchableOpacity>
-                            <Play name="playcircleo" size={20} color="#CB3BF7" />
+                            <Play name="playcircleo" size={20} color="#031489" />
                         </TouchableOpacity>
                     </View>
                 </LinearGradient>
@@ -109,18 +110,18 @@ const BuyAlbum = ({ route }) => {
     return (
         <SafeAreaView style={styles.body}>
             <View style={{ flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 20 }}>
-                <TouchableOpacity onPress={() => navigation.pop()}>
-                    <DownArrow name="arrow-left" size={20} color="#fff" />
+                        <TouchableOpacity style={{ width: 50 }} onPress={() => navigation.pop()}>
+                    <DownArrow name="arrow-left" size={20} color="#031489" />
                 </TouchableOpacity>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold' }}>{routee.name}</Text>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' , marginRight: 30}}>
+                    <Text style={{ alignSelf: 'center', color: '#031489', fontWeight: 'bold' }}>{routee.name}</Text>
                 </View>
             </View>
-            <ScrollView style={{ flex: 1, alignSelf: "stretch", backgroundColor: "#0009" }}
+            <ScrollView style={{ flex: 1, alignSelf: "stretch", backgroundColor: "#fff" }}
                 contentContainerStyle={{ flex: 1 }}
                 contentContainerStyle={{ flexGrow: 1 }}
             >
-                <View style={{ marginTop: 10, paddingHorizontal: 10 }}>
+                <View style={{ marginTop: 10, paddingHorizontal: 10 , }}>
                   
                     <FlatList
                         data={Music}

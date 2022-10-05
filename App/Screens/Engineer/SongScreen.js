@@ -8,11 +8,16 @@ import { useNavigation } from '@react-navigation/core';
 import Icon from 'react-native-vector-icons/AntDesign';
 import ApiServices from '../../Server/ApiServices';
 import Iconn from 'react-native-vector-icons/FontAwesome';
+import Icoon from 'react-native-vector-icons/AntDesign';
+
 import LinearGradient from 'react-native-linear-gradient';
 import Loading from '../../Components/Loading';
 import { useIsFocused } from "@react-navigation/native";
 import AppServices from '../../Server/AppServices';
 import Play from 'react-native-vector-icons/AntDesign';
+import Loginn from 'react-native-vector-icons/Entypo';
+import BuyNow from 'react-native-vector-icons/FontAwesome5';
+
 
 
 const { width } = Dimensions.get('window')
@@ -53,6 +58,7 @@ const SongScreen = ({ route }) => {
     const [recentArtist, setrecentArtist] = useState('')
     const [refresh, setRefresh] = useState(true)
     const [songPlayed, setsongPlayed] = useState('')
+    const [albumTypeId, setalbumTypeId] = useState('')
 
     const progress = useProgress()
 
@@ -129,17 +135,16 @@ const SongScreen = ({ route }) => {
         }
     }
     useEffect(() => {
-      
-            setupPlayer();
-            getTokenData()
-        
+
+        setupPlayer();
+        getTokenData()
+
     }, [])
     const getTokenData = async () => {
         let u_toke = ""
         const Storage = new ApiServices()
         u_toke = await Storage.getToken()
         setToken(u_toke)
-        debugger
     }
 
 
@@ -162,6 +167,7 @@ const SongScreen = ({ route }) => {
             if (res.data) {
                 let albumData = res.data.data.music_in_album
                 setMusic(albumData)
+                setalbumTypeId(albumData[0].album_id)
                 setRefresh(!refresh)
             }
         } catch (err) {
@@ -171,18 +177,18 @@ const SongScreen = ({ route }) => {
         setprocess(false)
     }
 
-    const onClickRandomButton = (sample_url,title,artist_name) => {
-      setsongPlayed(sample_url)
+    const onClickRandomButton = (sample_url, title, artist_name) => {
+        setsongPlayed(sample_url)
         setrecentTitle(title),
-        setrecentArtist(artist_name)
+            setrecentArtist(artist_name)
     }
-  
+
 
     const renderItem = ({ item, index }) => {
         return (
-            <TouchableOpacity onPress={() => onClickRandomButton(item.sample_url,item.title, item.artist_name)
-          }>
-                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#000', '#000',]}
+            <TouchableOpacity onPress={() => onClickRandomButton(item.sample_url, item.title, item.artist_name)
+            } style={{marginHorizontal:2, }}>
+                <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#fff', '#fff',]}
                     style={{
                         paddingVertical: 5, marginTop: 5, borderRadius: 7, paddingHorizontal: 10, shadowOffset: {
                             width: 0,
@@ -190,18 +196,18 @@ const SongScreen = ({ route }) => {
                         },
                         shadowOpacity: 0.60,
                         shadowRadius: 15.00,
-                        elevation: 10, shadowColor: '#000'
+                        elevation: 10,
                     }}>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                         <View style={{ flexDirection: 'row', }}>
                             <Image source={{ uri: params.url }} style={{ width: 50, height: 50, borderRadius: 5 }} />
                             <View style={{ marginLeft: 10, justifyContent: 'center' }}>
-                                <Text style={[styles.Text, { fontSize: 14, color: '#CB3BF7' }]}>{item.title}</Text>
-                                <Text style={[styles.Text, { fontSize: 8 }]}>{item.artist_name}</Text>
+                                <Text style={[styles.Text, { fontSize: 14, color: '#031489', fontWeight:'bold' }]}>{item.title}</Text>
+                                <Text style={[styles.Text, { fontSize: 11, color: '#000'}]}>{item.artist_name}</Text>
                             </View>
                         </View>
                         <TouchableOpacity>
-                            <Play name="playcircleo" size={20} color="#CB3BF7" />
+                            <Play name="playcircleo" size={20} color="#fff" />
                         </TouchableOpacity>
                     </View>
                 </LinearGradient>
@@ -211,31 +217,46 @@ const SongScreen = ({ route }) => {
 
     return (
         <LinearGradient start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} colors={['#4F4C4D', '#ffffff00',]} style={styles.body}>
-
-
-
-            <View style={{ flexDirection: 'row', paddingVertical: 30, paddingHorizontal: 50 }}>
-                <TouchableOpacity onPress={() => navigation.pop()}>
+            <View style={{ flexDirection: 'row', paddingVertical: 30, paddingHorizontal: 50, marginTop: 30 }}>
+                <TouchableOpacity onPress={() => navigation.pop()} style={{ width: 50 }}>
                     <Iconn name="arrow-left" size={20} color="#fff" />
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 30, marginVertical: 10 }}>
-
                 <View style={{ flexDirection: 'row', paddingVertical: 10 }}>
                     <Text style={{ color: '#fff' }}>Price : </Text>
                     <Text style={{ color: '#fff', fontWeight: 'bold' }} >${price}</Text>
                 </View>
-                <View style={{ flexDirection: 'row' }}>
-                    <Text style={{ color: '#fff' }}>Buy_Album :</Text>
-                    <Text style={{ color: 'yellow', marginLeft: 5, textDecorationLine: 'underline' }} onPress={() => token != false ? Linking.openURL(purchase_url) : navigation.navigate('Login')}> {token != false ? "Click Here" : "Login"}</Text>
+                <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
+                    <Text style={{ color: '#fff', alignSelf: 'center' }}>{token != false ?  '' : 'Want to buy?'}</Text>
+                    <TouchableOpacity style={{ paddingHorizontal:10, paddingVertical: 5, backgroundColor: token != false ? "#031489": 'transparent', flexDirection: 'row', marginHorizontal: 5,  borderRadius: 999, justifyContent: 'center', alignItems: 'center' ,
+                      shadowColor: token != false ? '#fff' : 'transparent',
+                      shadowOffset: {
+                          width: 0,
+                          height: 6,
+                      },
+                      shadowOpacity: 0.58,
+                      shadowRadius: 16.00,
+                      elevation: 18,
+                      }}>
+                        {token != false ?
+                           <View></View>
+                            :
+                            <Loginn name="login" size={10} color="yellow" />
 
+                        }
+                        <Text style={{ color: token != false ? "#fff":'yellow',alignSelf:'center' , textDecorationLine: token != false ? 'none':'underline' }} onPress={() => token != false ? navigation.navigate('Payment', {
+                            payment: albumTypeId,
+                            token: token,
+                            price: price
+
+                        }) : navigation.navigate('Login')}> {token != false ? "Buy Now" : "Login"}</Text>
+                    </TouchableOpacity>
                 </View>
-
-
             </View>
             <View style={{
                 width: 195, height: 195, justifyContent: 'center', alignItems: 'center', alignSelf: 'center',
-                shadowColor: '#ff0065',
+                shadowColor: '#031489',
                 shadowOffset: {
                     width: 0,
                     height: 20,
@@ -244,7 +265,7 @@ const SongScreen = ({ route }) => {
                 shadowRadius: 16.00,
                 elevation: 50,
                 borderRadius: 10,
-                backgroundColor: '#000',
+                backgroundColor: '#fff',
             }}>
                 <Image style={{
                     width: 195, height: 195, borderRadius: 5
@@ -252,21 +273,21 @@ const SongScreen = ({ route }) => {
 
             </View>
             <View style={{ flexDirection: 'row', marginVertical: 20, alignItems: 'center', justifyContent: 'space-between' }}>
-                <View style={{ paddingHorizontal: 30, }}>
-                    <Text style={{ color: '#CB3BF7', fontSize: 14, fontWeight: 'bold', alignSelf: 'center' }}>{songPlayed? recentTitle :  title}</Text>
-                    <Text style={{ color: '#fff', fontSize: 9, fontWeight: 'bold', paddingLeft: 9, alignSelf: 'center' }}> { songPlayed ? recentArtist : artist}</Text>
-                    <Text style={{ color: '#fff', alignSelf: 'center', fontSize: 12, marginTop: 5 }}>
+                <View style={{ paddingHorizontal: 20,width:'60%', alignSelf:'center' }}>
+                    <Text style={{ color: '#031489', fontSize: 14, fontWeight: 'bold',  }}>{songPlayed ? recentTitle : title}</Text>
+                    <Text style={{ color: '#000', fontSize: 9, fontWeight: 'bold',  }}> {songPlayed ? recentArtist : artist}</Text>
+                    <Text style={{ color: '#000', fontSize: 12, marginTop: 5 }}>
                         {new Date((progress.duration - progress.position) * 1000).toISOString().substr(14, 5)}
                     </Text>
                 </View>
                 <TouchableOpacity style={{
-                    width: 50,
-                    height: 50,
+                    width: 60,
+                    height: 60,
                     borderRadius: 99,
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderRadius: 999,
-                    shadowColor: '#CB3BF7',
+                    shadowColor: '#031489',
                     shadowOffset: {
                         width: 0,
                         height: 15,
@@ -274,27 +295,24 @@ const SongScreen = ({ route }) => {
                     shadowOpacity: 0.58,
                     shadowRadius: 16.00,
                     elevation: 24,
-                    backgroundColor: '#ff0065',
+                    backgroundColor: '#031489',
                     marginHorizontal: 50
                 }} onPress={() => togglePlayBack(playbackState)}>
                     <TouchableOpacity onPress={() => togglePlayBack(playbackState)}>
 
                         {playbackState == State.Playing ?
-                            <Iconn name="pause" size={10} color="#fff" /> :
-                            <Iconn name="play" size={10} color="#fff" />}
+                            <Icoon name="pausecircleo" size={50} color="#fff" /> :
+                            <Icoon name="playcircleo" size={50} color="#fff" />}
                     </TouchableOpacity>
-
                 </TouchableOpacity>
-
             </View>
-
-            <View style={{ width: '100%', height: 0.7, borderWidth: 0.2, borderColor: '#ff0065', marginTop: 0 }}></View>
-
-            <ScrollView style={{ flex: 1, alignSelf: "stretch", backgroundColor: "#0009" }}
+            <View style={{ width: '100%', height: 0.7, borderWidth: 0.2, borderColor: '#031489', marginTop: 0 }}></View>
+            <Text style={{color: '#031489', marginVertical: 5, fontWeight:'bold', fontSize: 14, marginHorizontal: 10, marginTop: 5}}> other songs</Text>
+            <ScrollView style={{ flex: 1, alignSelf: "stretch", backgroundColor: "transparent" , }}
                 contentContainerStyle={{ flex: 1 }}
                 contentContainerStyle={{ flexGrow: 1 }}
             >
-                <View style={{ marginTop: 10, paddingHorizontal: 10 }}>
+                <View style={{ marginTop: 10, paddingHorizontal: 10 , marginBottom: 15, paddingBottom: 15}}>
 
                     <FlatList
                         data={Music}

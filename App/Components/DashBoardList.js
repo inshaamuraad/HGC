@@ -8,37 +8,33 @@ const DashBoardList = () => {
   const Vedios = [
     {
       id: 0,
-      uri: require('../../Assets/Images/pipeline.mp4')
+      uri: 'https://hgcradio.org/storage/app/public/ads/your_ad_here_redone_1.mp4'
     },
     {
       id: 1,
-      uri: require('../../Assets/Images/scroll_pages.mp4')
+      uri: 'https://hgcradio.org/storage/app/public/ads/your_ad_here_redone_2.mp4'
     },
     {
       id: 2,
-      uri: require('../../Assets/Images/pipeline.mp4')
+      uri: 'https://hgcradio.org/storage/app/public/ads/your_ad_here_redone_3.mp4'
     },
-    {
-      id: 3,
-      uri: require('../../Assets/Images/singalong.mp4')
-    },
-    {
-      id: 4,
-      uri: require('../../Assets/Images/scroll_pages.mp4')
-    },
+  
   ]
   const renderItem = ({ item }) => {
   
     return (
       <TouchableOpacity style={styles.flatListVedios} >
-        <Video style={styles.VedioContainerSlider} source={item.uri}
+        <Video style={styles.VedioContainerSlider} source={{uri : item.uri}}
           play={true}
+          playWhenInactive={true}
+        resizeMode = "contain"
+
         />
       </TouchableOpacity>
     )
   }
   return (
-    <View style={{ marginTop: 10 }}>
+    <View style={{ marginTop: 10, marginHorizontal: 10, marginBottom:10 }}>
       <FlatList
         horizontal
         data={Vedios}

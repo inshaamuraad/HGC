@@ -15,53 +15,53 @@ export default function SellAlbum() {
     const navigation = useNavigation()
 
     return (
-        <View style={{ flex: 1, backgroundColor: '#000' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <View style={{
                     height: "100%",
                     width: "100%",
                 }}>
                     {/* Buttons */}
-                    <View style={{ flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 20 }}>
-                        <TouchableOpacity onPress={() => navigation.pop()}>
-                            <DownArrow name="arrow-left" size={20} color="#fff" />
+                    <View style={{ flexDirection: 'row', paddingHorizontal: 30, paddingVertical: 20, marginTop : 30 }}>
+                        <TouchableOpacity style={{ width: 50 }} onPress={() => navigation.pop()}>
+                            <DownArrow name="arrow-left" size={20} color="#031489" />
                         </TouchableOpacity>
-                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ alignSelf: 'center', color: '#fff', fontWeight: 'bold' }}>{routee.name}</Text>
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginRight: 30 }}>
+                            <Text style={{ alignSelf: 'center', color: '#031489', fontWeight: 'bold' }}>{routee.name}</Text>
                         </View>
                     </View>
                     <View style={{ paddingVertical: 20 }}>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
                             <TouchableOpacity
                                 onPress={() => currentTab(true)}
-                                style={{ width: 150, height: 50, backgroundColor: '#292929', borderRadius: 5, justifyContent: 'center', alignItems: 'center' ,
+                                style={{ width: 150, height: 50, backgroundColor: '#031489', borderRadius: 5, justifyContent: 'center', alignItems: 'center' ,
                                 shadowOffset: {
                                     width: 0,
                                     height: 15,
                                 },
                                 shadowOpacity: 0.60,
                                 shadowRadius: 15.00,
-                                elevation: 20, shadowColor: '#ff0065'}}>
+                                elevation: 20, }}>
                                 <View style={{ flexDirection: 'row', }}>
                                     {/* <Image source={CurrentIcon} style={{ width: 20, height: 20 }} /> */}
-                                    <Current name="book" size={20} color={tab ? "#CB3BF7" : '#A9A9A9'} />
+                                    <Current name="book" size={20} color={tab ? "#fff" : '#A9A9A9'} />
 
-                                    <Text style={{ paddingHorizontal: 5, fontSize: 14, color: tab ? "#CB3BF7" : '#A9A9A9', fontWeight: 'bold', alignSelf: 'center' }}>Guideline</Text>
+                                    <Text style={{ paddingHorizontal: 5, fontSize: 14, color: tab ? "#fff" : '#A9A9A9', fontWeight: 'bold', alignSelf: 'center' }}>Guideline</Text>
                                 </View>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => currentTab(false)}
-                                style={{ width: 150, height: 50, backgroundColor: '#292929', borderRadius: 5, justifyContent: 'center', alignItems: 'center',
+                                style={{ width: 150, height: 50, backgroundColor: '#031489', borderRadius: 5, justifyContent: 'center', alignItems: 'center',
                                 shadowOffset: {
                                     width: 0,
                                     height: 15,
                                 },
                                 shadowOpacity: 0.60,
                                 shadowRadius: 15.00,
-                                elevation: 20, shadowColor: '#ff0065' }}>
+                                elevation: 20, }}>
                                 <View style={{ flexDirection: 'row', }}>
-                                    <History name="login" size={20} color={!tab ? "#CB3BF7" : '#A9A9A9'} />
-                                    <Text style={{ paddingHorizontal: 5, fontSize: 14, color: !tab ? "#CB3BF7" : '#A9A9A9', fontWeight: 'bold' }}>Logged</Text>
+                                    <History name="login" size={20} color={!tab ? "#fff" : '#A9A9A9'} />
+                                    <Text style={{ paddingHorizontal: 5, fontSize: 14, color: !tab ? "#fff" : '#A9A9A9', fontWeight: 'bold' }}>Logged</Text>
 
                                 </View>
                             </TouchableOpacity>

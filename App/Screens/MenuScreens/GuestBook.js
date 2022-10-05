@@ -62,73 +62,95 @@ export default function GuestBook() {
       <ScrollView>
         <View style={[styles.InputContainer, { marginTop: 30 }]}>
           <TextInput placeholder="First Name"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setname(text)}
+            style={{ color: "#031489" }}
+
           />
         </View>
         <View style={[styles.InputContainer]}>
           <TextInput placeholder="Enter Email"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setemail(text)}
+            style={{ color: "#031489" }}
+
           />
         </View>
         <View style={[styles.InputContainer]}>
           <TextInput placeholder="Country"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setcountry(text)}
+            style={{ color: "#031489" }}
+
           />
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <View style={[styles.InputContainerDouble,{color:'#CB3BF7'}]}>
+          <View style={[styles.InputContainerDouble,{color:'#031489', width: 180}]}>
             <TextInput placeholder="Enter City"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#031489"
               onChangeText={(text) => setcity(text)}
+              style={{ color: "#031489" }}
+
             />
           </View>
-          <View style={[styles.InputContainerDouble, {color:'#CB3BF7'}]}>
+          <View style={[styles.InputContainerDouble, {color:'#031489',width: 180}]}>
             <TextInput placeholder="Enter State"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#031489"
               onChangeText={(text) => setstate(text)}
+              style={{ color: "#031489" }}
+
             />
           </View>
         </View>
-        <Text style={{ fontWeight: "bold", color: "#fff", paddingHorizontal: 20, paddingVertical: 10 }}>Invite Friends & Family Members</Text>
+        <Text style={{ fontWeight: "bold", color: "#031489", paddingHorizontal: 20, paddingVertical: 10 }}>Invite Friends & Family Members</Text>
         <View style={[styles.InputContainer, { marginTop: 10 }]}>
           <TextInput placeholder="First Name"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setinviteName(text)}
+            style={{ color: "#031489" }}
+
           />
         </View>
         <View style={[styles.InputContainer]}>
           <TextInput placeholder="Enter Email"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setinviteEmail(text)}
+            style={{ color: "#031489" }}
+
           />
         </View>
         <View style={[styles.InputContainer]}>
           <TextInput placeholder="Country"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setinviteCountry(text)}
+            style={{ color: "#031489" }}
+
           />
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          <View style={[styles.InputContainerDouble]}>
+          <View style={[styles.InputContainerDouble,{width: 180}]}>
             <TextInput placeholder="Enter City"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#031489"
               onChangeText={(text) => setinviteCity(text)}
-              style={{ color: "#fff" }} />
+              style={{ color: "#031489" }} />
           </View>
-          <View style={[styles.InputContainerDouble]}>
+          <View style={[styles.InputContainerDouble,{width: 180}]}>
             <TextInput placeholder="Enter State"
-              placeholderTextColor="#fff"
+              placeholderTextColor="#031489"
               onChangeText={(text) => setinviteState(text)}
+              style={{ color: "#031489" }}
+
             />
           </View>
         </View>
-        <View style={[styles.InputContainer]}>
+        <View style={[styles.InputContainer,{
+          height: 40
+        }]}>
           <TextInput placeholder="Enter Message"
-            placeholderTextColor="#fff"
+            placeholderTextColor="#031489"
             onChangeText={(text) => setmessage(text)}
+            style={{ color: "#031489" }}
+
             multiline />
         </View>
         <Button

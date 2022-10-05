@@ -1,8 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const Button = {
-    flex: 1,
-    borderRadius: 999,
+    borderRadius: 99,
     borderWidth: 1,
     padding: 5,
     alignSelf: "stretch",
@@ -14,7 +13,7 @@ const styles = StyleSheet.create({
 
     body: {
         flex: 1,
-        backgroundColor: '#000'
+        backgroundColor: '#fff'
     },
     TopContainer: {
         flexDirection: 'row',
@@ -47,8 +46,8 @@ const styles = StyleSheet.create({
     },
     weeklyContainer: {
         height: 40,
-        borderColor: '#4F1769',
-        backgroundColor: '#4F1769',
+        borderColor: '#031489',
+        backgroundColor: '#031489',
         borderWidth: 1,
         borderRadius: 20,
         justifyContent: 'center',
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
     },
     InputContainer: {
         height: 40,
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         borderWidth: 1,
         borderRadius: 20,
         justifyContent: 'center',
@@ -65,19 +64,34 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginVertical: 4,
         elevation: 20,
-        shadowColor:'#CB3BF7',
-        borderColor:'#CB3BF7'
+        borderColor: '#fff',
+        shadowOffset: {
+            width: 0,
+            height: 12,
+          },
+          shadowOpacity: 0.58,
+          shadowRadius: 16.00,
+      
 
     },
     SearchContainer: {
         borderRadius: 10,
         backgroundColor: 'transparent',
         color: '#fff',
-        borderColor: '#CB3BF7',
+        borderColor: '#031489',
         borderWidth: 1,
         borderRadius: 50,
         height:35,
-        width: 300
+        width: '100%'
+
+    },
+    SeaarchContainer: {
+        borderRadius: 10,
+        backgroundColor: 'transparent',
+        borderColor: '#031489',
+        borderWidth: 1,
+        height:40,
+        width: 300,
 
     },
     MessageContainer: {
@@ -90,23 +104,42 @@ const styles = StyleSheet.create({
         marginVertical: 4,
         paddingVertical: 5,
         elevation: 20,
-        shadowColor:'#CB3BF7',
-        borderColor:'#CB3BF7'
+       
+        borderColor:'#031489'
 
     },
     InputContainerDouble: {
         height: 40,
-        backgroundColor: '#000',
+        backgroundColor: '#fff',
         borderWidth: 1,
         borderRadius: 20,
         justifyContent: 'center',
         paddingHorizontal: 50,
         marginHorizontal: 10,
         marginVertical: 4,
-        borderColor:'#CB3BF7'
+        elevation: 10,
+        borderColor: '#fff',
+        shadowOffset: {
+            width: 0,
+            height: 12,
+          },
+          shadowOpacity: 0.58,
+          shadowRadius: 16.00,
+       
+    },
+    InputContainerDoubleContact: {
+        paddingVertical: 10,
+        backgroundColor: '#fff',
+        borderBottomWidth: 1,
+        justifyContent: 'center',
+        marginHorizontal: 10,
+        marginVertical: 4,
+        paddingHorizontal: 20,
+          borderColor:'#031489'
+       
     },
     Text: {
-        color: '#fff'
+        color: '#000'
     },
     underlineStyleBase: {
         width: 45,
@@ -120,7 +153,7 @@ const styles = StyleSheet.create({
     
       },
       sliderContainer: {
-        backgroundColor: 'floralwhite',
+        backgroundColor: 'transparent',
         borderRadius: 20,
         height: 500,
         width: '90%',
@@ -171,8 +204,7 @@ const styles = StyleSheet.create({
     },
     VedioContainerSlider: {
         height: 100,
-        width: 240,
-        shadowColor: "#AD15FD",
+        width: 150,
         shadowOffset: {
             width: 0,
             height: 2,
@@ -184,15 +216,13 @@ const styles = StyleSheet.create({
     },
     flatListVedios: {
         height: 100,
-        width: 180,
+        width: 150,
         borderColor: '#000',
         borderWidth: 0.2,
         borderRadius: 0,
         justifyContent: 'center',
         alignItems: 'center',
         marginHorizontal: 5,
-        paddingHorizontal: 5,
-        shadowColor: "#AD15FD",
         shadowOffset: {
             width: 0,
             height: 2,
@@ -215,7 +245,7 @@ const styles = StyleSheet.create({
     },
     downBar: {
         backgroundColor: '#fff',
-        bottom: -45,
+        bottom: -20,
         shadowColor: "#AD15FD",
         shadowOffset: {
             width: 0,
@@ -224,8 +254,6 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
 
-        elevation: 5,
-        height: 100,
     },
     column: {
         // marginTop:navHeight,
@@ -234,7 +262,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     buttonLogin: {
-        backgroundColor: '#B98E00',
+        backgroundColor: '#031489',
         borderRadius: 30,
         alignItems: "center",
         paddingHorizontal: 140,
@@ -256,17 +284,17 @@ const styles = StyleSheet.create({
     textInput: {
         fontSize: 16,
         width: "100%",
-        color: "#000",
+        color: "#fff",
         borderRadius: 10,
         padding: 12,
         marginBottom: 10,
-        backgroundColor: "#EDEDED",
-        borderColor: '#EDEDED',
+        backgroundColor: "#fff",
+        borderColor: '#fff',
         borderBottomWidth: 1,
     },
     btnContainer: {
         ...Button,
-        backgroundColor: '#4F1769'
+        backgroundColor: '#031489'
     },
 
     engineerContianer: {
@@ -279,7 +307,7 @@ const styles = StyleSheet.create({
     floatingButton: {
         borderRadius: 5,
         bottom: 20,
-        backgroundColor: "#9948a3",
+        backgroundColor: "#031489",
         right: 20,
         padding: 20,
         borderRadius: 999,

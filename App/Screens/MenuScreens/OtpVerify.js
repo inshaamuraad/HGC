@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, ImageBackground } from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input'
 import LottieView from 'lottie-react-native';
-import BG from '../../../Assets/Images/image.jpeg'
+import BG from '../../../Assets/Images/muss.jpeg'
 import styles from '../../../Assets/css/style';
 import { useNavigation } from '@react-navigation/native';
 import AppServices from '../../Server/AppServices';
@@ -17,7 +17,7 @@ const OtpVerify = ({ route }) => {
     const OTPHandle = async (code) => {
         const server = new AppServices();
         var res = await server.OTPVerify(code)
-        debugger
+        
         try {
             if (res.data.status == "Success") {
                 navigation.navigate('Login')

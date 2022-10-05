@@ -1,48 +1,55 @@
-import React from 'react';
+import React, { useState ,useEffect} from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import styles from '../../Assets/css/style';
 import PlayButton from '../../Assets/Icons/playButton.png'
-import MusicAlbum from '../../Assets/Icons/musicAlbum.png'
+import MusicAlbum from '../../Assets/Icons/album.jpeg'
 import { useNavigation } from '@react-navigation/native';
-
+import { useRoute } from '@react-navigation/native';
 
 export default function DownMusicBar({ }) {
 
     const navigation = useNavigation();
+    const route = useRoute();
+    const [url, seturl] = useState('')
 
+    useEffect(() => {
+        routeCheck();
+    }, [])
+    const routeCheck = () => {
 
+        if (route.name == 'Play/History') {
+            seturl('https://hgcradio.org/storage/app/public/ads/images/adv839by200(1).png')
+        }if(route.name == 'Gospel Websites'){
+            seturl('https://hgcradio.org/storage/app/public/ads/images/ad_1_1200by219.png')
+        }if(route.name == 'Engineers'){
+            seturl('https://hgcradio.org/storage/app/public/ads/images/1200by 219.png')
+        }if(route.name == 'Schedule'){
+            seturl('https://hgcradio.org/storage/app/public/ads/images/adv839by200(1).png')
+        }
+        if(route.name == 'Contact'){
+            seturl('https://hgcradio.org/storage/app/public/ads/images/adv839by200(1).png')
+        }
+        if(route.name == 'GuestBook'){
+            seturl('https://hgcradio.org/storage/app/public/ads/images/ad_1_1200by219.png')
+        }
+    }
+    
 
-
+    if(route.name == 'Play/History' ||  route.name == 'Gospel Websites' || route.name == 'Schedule' ||route.name == 'Contact' || route.name == 'GuestBook'){
     return (
-        <View style={styles.downBar}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', }}>
-                <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-around', paddingLeft: 13, paddingVertical: 8, paddingHorizontal: 8 }} 
-                onPress={() => navigation.navigate('RadioLive')}>
-                    <View>
-                        <Text style={{ fontWeight: 'bold', color: '#000' }}>Playing Music</Text>
-                        <Text style={{ fontSize: 9, color: '#AD15FD', marginTop: 2 }}>Listen your favourite music</Text>
-                        <Text style={{ fontSize: 8, marginTop: 2, color: '#fff' }}>Album : Collecto'r Edition </Text>
-                        <Text style={{ fontSize: 8, marginTop: 2, color: '#fff' }}>Artist : 10-save-the-youth-today</Text>
-                    </View>
-                    <TouchableOpacity style={{ justifyContent: 'center' }} onPress={() => navigation.navigate('RadioLive')}>
-                        <TouchableOpacity onPress={() => navigation.navigate('RadioLive')}>
-                            <Image source={PlayButton} style={[styles.playBtn, { borderColor: '#1E0F2FS', borderWidth: 1, marginBottom:20, marginLeft:30 }]} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-                </TouchableOpacity>
-                <View style={{ height: "100%", width: 2, backgroundColor: 'grey', marginRight: 50 }}>
-                </View>
-                <TouchableOpacity style={{ marginRight: 50,paddingVertical:7 , marginBottom:20}} onPress={() => navigation.navigate('AlbumCatlog')}>
-                    <Image source={MusicAlbum} style={{ width: 30, height: 30, alignSelf: 'center' }} />
-                    <Text style={{ fontSize: 8, marginTop: 2, color: '#000' }}>Album's Catelog</Text>
-                </TouchableOpacity>
-
-
-
-            </View>
-
-
-
+        <View style={[styles.downBar,{marginBottom: 10, borderWidth: 1,
+            height: 100, }]}>
+            <Image source={{ uri: url }} style={{ width: '100%', height:(route.name == 'Play/History' || route.name == 'Schedule' || route.name == 'Contact')? 90 :70, resizeMode: (route.name == 'Play/History' || route.name == 'Schedule' || route.name == 'Contact') ? 'cover' :'contain'  }} />
         </View>
     );
-}
+    }if(route.name == 'Engineers'){
+        return (
+            <View style={[styles.downBar,{ borderWidth: 1,marginTop: '60%',}]}>
+                <Image source={{ uri: url }} style={{ width: '100%', height: 70, resizeMode: 'cover'  }} />
+
+            </View>
+        );
+        }
+    }
+
+

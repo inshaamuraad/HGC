@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, ImageBackground, ScrollView, Image, TextInput, TouchableOpacity } from 'react-native';
-import BG from '../../../Assets/Images/image.jpeg'
+import BG from '../../../Assets/Images/muss.jpeg'
 import HD from '../../../Assets/Images/headPhone.png'
 import styles from '../../../Assets/css/style';
 import Icon from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/core';
 import AppServices from '../../Server/AppServices';
 import Validation from '../../Components/Validation';
+import Logo from '../../../Assets/Icons/Logo.png'
+
 const Register = () => {
     const navigation = useNavigation()
     const [name, setname] = useState('')
@@ -43,7 +45,7 @@ const Register = () => {
             if (checkName == true &&  checkEmail == true && checkPassword == true && checkConfirmPassword == true && passwordMatched == true && checkUserName == true) {
                 let res = await Storage.storeRegisterData(name, email.toLowerCase(), userName, password, confirmPassword)
                 if (res.data.status == "Success") {
-                    debugger
+                    
                     navigation.navigate('SimplerOtpVerfication',{
                         email: res.data.data.user.email
                     });
@@ -83,13 +85,15 @@ const Register = () => {
                 contentContainerStyle={{ flexGrow: 1 }}
             >
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                    <Image source={HD} style={{ width: 100, height: 100 }} />
-                    <Text style={{ color: '#B98E00', marginTop: 5, fontWeight: 'bold' }}>Register yourself with us!!</Text>
+                <View style={{ width: 140, height: 140, borderRadius: 999, borderWidth: 4, alignItems: 'center', justifyContent: 'center', borderColor: '#031489' }}>
+                                <Image style={{ width:120, height: 120 }} source={Logo} />
+                            </View>
+                    <Text style={{ color: '#fff', marginTop: 5, fontWeight: 'bold' }}>Register yourself with us!!</Text>
                     <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: 30, borderRadius: 100, marginTop: 30 }}>
                         <TextInput
                             style={[styles.textInput, { borderRadius: 20, backgroundColor: 'transparent', borderWidth: 1, borderColor: 'gray', fontSize: 12, color: '#fff' }]}
                             placeholder="Enter Your Name"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#fff"
                             onChangeText={text => setname(text)}
 
                         />
@@ -97,7 +101,7 @@ const Register = () => {
                     {allAlert == "1" && <>
                         <Text
                             style={{
-                                fontSize: 10, color: "#B98E00", bottom: 5, marginRight: '50%'
+                                fontSize: 10, color: "#fff", bottom: 5, marginRight: '50%'
                             }}
                         > * Enter your Full Name
                         </Text>
@@ -106,7 +110,7 @@ const Register = () => {
                         <TextInput
                             style={[styles.textInput, { borderRadius: 20, backgroundColor: 'transparent', borderWidth: 1, borderColor: 'gray', fontSize: 12, color: '#fff' }]}
                             placeholder="Enter Your Email ID"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#fff"
                             onChangeText={text => setEmail(text)}
                         />
                     </View>
@@ -114,7 +118,7 @@ const Register = () => {
                     {allAlert == "6" && <>
                         <Text
                             style={{
-                                fontSize: 10, color: "#B98E00", bottom: 5, marginRight: '50%'
+                                fontSize: 10, color: "#fff", bottom: 5, marginRight: '50%'
                             }}
                         > * This Email is already taken
                         </Text>
@@ -122,7 +126,7 @@ const Register = () => {
                     {allAlert == "2" && <>
                         <Text
                             style={{
-                                fontSize: 8, color: "#B98E00", bottom: 5, marginRight: '53%'
+                                fontSize: 8, color: "#fff", bottom: 5, marginRight: '53%'
                             }}
                         > * Enter an Email Address
                         </Text>
@@ -131,14 +135,14 @@ const Register = () => {
                         <TextInput
                             style={[styles.textInput, { borderRadius: 20, backgroundColor: 'transparent', borderWidth: 1, borderColor: 'gray', fontSize: 12, color: '#fff' }]}
                             placeholder="Enter Your User Name"
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#fff"
                             onChangeText={text => setuserName(text)}
                         />
                     </View>
                     {allAlert == "3" && <>
                         <Text
                             style={{
-                                fontSize: 10, color: "#B98E00", bottom: 5, marginRight: '50%'
+                                fontSize: 10, color: "#fff", bottom: 5, marginRight: '50%'
                             }}
                         > * Enter Your User Name
                         </Text>
@@ -148,7 +152,7 @@ const Register = () => {
                             style={[styles.textInput, { borderRadius: 20, backgroundColor: 'transparent', borderWidth: 1, borderColor: 'gray', fontSize: 12, color: '#fff' }]}
                             placeholder="Enter Your Password"
                             secureTextEntry={texttype}
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#fff"
                             onChangeText={text => setPassword(text)}
                         />
                         <TouchableOpacity
@@ -164,7 +168,7 @@ const Register = () => {
                     {allAlert == "4" && <>
                         <Text
                             style={{
-                                fontSize: 10, color: "#B98E00", bottom: 5, marginRight: '50%'
+                                fontSize: 10, color: "#fff", bottom: 5, marginRight: '50%'
                             }}
                         > * Enter Your Password
                         </Text>
@@ -174,7 +178,7 @@ const Register = () => {
                             style={[styles.textInput, { borderRadius: 20, backgroundColor: 'transparent', borderWidth: 1, borderColor: 'gray', fontSize: 12, color: '#fff' }]}
                             placeholder="Enter Your Confirm Password"
                             secureTextEntry={texttype}
-                            placeholderTextColor="#B8B8B8"
+                            placeholderTextColor="#fff"
                             onChangeText={text => setconfirmPassword(text)}
 
                         />
@@ -192,7 +196,7 @@ const Register = () => {
                     {allAlert == "5" && <>
                         <Text
                             style={{
-                                fontSize: 10, color: "#B98E00", bottom: 5, marginRight: '45%'
+                                fontSize: 10, color: "#fff", bottom: 5, marginRight: '45%'
                             }}
                         > * Enter Your Confirm Password
                         </Text>
@@ -200,7 +204,7 @@ const Register = () => {
                     {passmatchAlert == true && <>
                         <Text
                             style={{
-                                fontSize: 10, color: "#B98E00", bottom: 5, marginRight: '45%'
+                                fontSize: 10, color: "#ffff", bottom: 5, marginRight: '45%'
                             }}
                         > * Password Not Matched !
                         </Text>
